@@ -1,0 +1,12 @@
+<!-- templates/select_route.html -->
+<form action="{{ url_for('select_route') }}" method="post">
+    <label>Select Route:
+        <select name="route_id">
+            {% for route in routes %}
+                <option value="{{ route.RouteID }}">{{ route.StartPoint }} to {{ route.EndPoint }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>User ID: <input type="text" name="user_id"></label><br>
+    <button type="submit">Check Traffic & Continue</button>
+</form>

@@ -1,0 +1,109 @@
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Route</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #2196F3, #03A9F4);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        label {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #fff;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #2196F3;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1976D2;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        a {
+            color: #03A9F4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Select Route</h1>
+        <form method="POST">
+            <label for="route_id">Select Route:</label>
+            <select id="route_id" name="route_id">
+                {% for route in routes %}
+                    <option value="{{ route.RouteID }}">{{ route.StartPoint }} to {{ route.EndPoint }}</option>
+                {% endfor %}
+            </select><br>
+
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+
+            <button type="submit">Select</button>
+        </form>
+    </div>
+</body>
+</html>

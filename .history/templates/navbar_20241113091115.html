@@ -1,0 +1,34 @@
+<!-- templates/navbar.html -->
+<nav class="navbar">
+    <a href="{{ url_for('logout') }}" class="logout-button">
+        🔒 <!-- Emoji as Logout Icon -->
+    </a>
+</nav>
+<style>
+    .navbar {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: transparent;
+        padding: 10px;
+        z-index: 1000;
+    }
+    
+    .logout-button {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: #fff;
+    }
+    
+    .logout-button:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+</style>

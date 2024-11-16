@@ -1,0 +1,39 @@
+<!-- templates/navbar.html -->
+<nav class="navbar">
+    <a href="{{ url_for('logout') }}" class="logout-button">
+        <img src="{{ url_for('static', filename='logout-icon.png') }}" alt="Logout" class="logout-icon">
+    </a>
+</nav>
+<style>
+    /* Styling for the simplified navbar */
+    .navbar {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: transparent; /* Transparent background */
+        padding: 10px;
+        z-index: 1000;
+    }
+    
+    .logout-button {
+        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-decoration: none;
+    }
+    
+    .logout-button:hover {
+        background-color: rgba(255, 255, 255, 0.4); /* Slightly darker on hover */
+    }
+    
+    .logout-icon {
+        width: 24px;
+        height: 24px;
+        filter: invert(100%); /* Makes icon white if it's a black icon */
+    }
+</style>

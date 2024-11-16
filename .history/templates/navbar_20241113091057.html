@@ -1,0 +1,38 @@
+<!-- Include Font Awesome in your HTML head -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMVXt7cY+hYFptvK4SkA7hU5fZZP/hmbXddAzW3" crossorigin="anonymous">
+
+<!-- templates/navbar.html -->
+<nav class="navbar">
+    <a href="{{ url_for('logout') }}" class="logout-button">
+        <i class="fas fa-sign-out-alt"></i> <!-- Font Awesome Logout Icon -->
+    </a>
+</nav>
+<style>
+    /* Styling for the simplified navbar */
+    .navbar {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        background: transparent; /* Transparent background */
+        padding: 10px;
+        z-index: 1000;
+    }
+    
+    .logout-button {
+        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: #fff;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+    
+    .logout-button:hover {
+        background-color: rgba(255, 255, 255, 0.4); /* Slightly darker on hover */
+    }
+</style>

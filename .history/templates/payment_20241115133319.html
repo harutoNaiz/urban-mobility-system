@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Previous head section remains the same -->
+<body>
+    <div class="container">
+        <h1>Confirm Your Booking</h1>
+        <form action="{{ url_for('process_booking') }}" method="post">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+
+            <label>Select Transport Mode:
+                <select name="transport_mode_id" id="transportSelect" onchange="updateCost()">
+                    {% for route in suggested_routes %}
+                        <option value="{{ route.TransportModeID }}" data-cost="{{ route.Cost }}">
+                            {{ route.ModeType }} - ${{ "%.2f"|format(route.Cost) }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </label><br>
+
+            <label>Payment Method: 
+                <select name="payment_method">
+                    <option value="Card">Card</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Online">Online</option>
+                </select>
+            </label><br>
+
+            <label>Cost:
+                <input type="text" name="cost" id="costInput" value="{{ suggested_routes[0]['Cost'] }}" readonly>
+            </label><br>
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+
+        <div class="cost-info">
+            <p>Your total cost: <strong id="totalCost">${{ "%.2f"|format(suggested_routes[0]['Cost']) }}</strong></p>
+        </div>
+    </div>
+
+    <script>
+        function updateCost() {
+            const select = document.getElementById('transportSelect');
+            const selectedOption = select.options[select.selectedIndex];
+            const cost = selectedOption.dataset.cost;
+            
+            document.getElementById('costInput').value = cost;
+            document.getElementById('totalCost').textContent = '$' + parseFloat(cost).toFixed(2);
+        }
+    </script>
+</body>
+</html>

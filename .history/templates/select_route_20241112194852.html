@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Route</title>
+</head>
+<body>
+    <h1>Select Route</h1>
+    <form method="POST">
+        <label for="route_id">Select Route:</label>
+        <select id="route_id" name="route_id">
+            {% for route in routes %}
+                <option value="{{ route.RouteID }}">{{ route.StartPoint }} to {{ route.EndPoint }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="hidden" name="user_id" value="{{ user_id }}">
+
+        <button type="submit">Select</button>
+    </form>
+</body>
+</html>

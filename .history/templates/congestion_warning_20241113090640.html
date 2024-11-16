@@ -1,0 +1,110 @@
+<!-- templates/select_route.html -->
+{% if session.get('user_id') %}
+    {% include 'navbar.html' %}
+{% endif %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congestion Warning</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FF5722, #FF9800);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        label {
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 10px;
+            text-align: left;
+            color: #fff;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 10px;
+            background-color: #fff;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: #FF5722;
+            color: #fff;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #E64A19;
+        }
+
+        a {
+            color: #FF9800;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Congestion Warning</h1>
+        <p>{{ traffic_warning }}</p>
+        <form action="{{ url_for('suggest_routes') }}" method="POST">
+            <input type="hidden" name="route_id" value="{{ route_id }}">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+
+            <label for="budget">Enter your budget to see options:</label>
+            <input type="number" id="budget" name="budget" min="0" step="0.01" required>
+
+            <button type="submit">See Options</button>
+        </form>
+    </div>
+</body>
+</html>

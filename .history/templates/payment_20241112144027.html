@@ -1,0 +1,20 @@
+<!-- templates/payment.html -->
+<form action="{{ url_for('process_booking') }}" method="post">
+    <input type="hidden" name="user_id" value="{{ user_id }}">
+    <label>Select Transport Mode:
+        <select name="transport_mode_id">
+            {% for route in suggested_routes %}
+                <option value="{{ route.TransportModeID }}">{{ route.TransportModeID }} - Cost: {{ route.Cost }}</option>
+            {% endfor %}
+        </select>
+    </label><br>
+    <label>Payment Method: 
+        <select name="payment_method">
+            <option value="Card">Card</option>
+            <option value="Cash">Cash</option>
+            <option value="Online">Online</option>
+        </select>
+    </label><br>
+    <label>Cost: <input type="text" name="cost" value="{{ suggested_routes[0]['Cost'] }}" readonly></label><br>
+    <button type="submit">Confirm Booking</button>
+</form>

@@ -1,0 +1,28 @@
+<!-- templates/navbar.html -->
+<nav>
+    <ul>
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('select_route') }}">Select Route</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</nav>
+<style>
+    /* Basic styling for the navbar */
+    nav {
+        background-color: #333;
+        padding: 10px;
+    }
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
+    nav ul li {
+        margin-right: 20px;
+    }
+    nav ul li a {
+        color: white;
+        text-decoration: none;
+    }
+</style>

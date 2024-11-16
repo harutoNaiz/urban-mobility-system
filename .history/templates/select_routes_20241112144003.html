@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Route Options</title>
+</head>
+<body>
+    <h1>Route Options</h1>
+    <p>Traffic Warning: {{ warning }}</p>
+    
+    {% if suggested_route %}
+        <h2>Suggested Route</h2>
+        <p>Transport Mode ID: {{ suggested_route.TransportModeID }}</p>
+        <p>Lowest Cost: {{ suggested_route.LowestCost }}</p>
+        <form method="post" action="/book">
+            <input type="hidden" name="transport_mode_id" value="{{ suggested_route.TransportModeID }}">
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="start_location" value="{{ start_location }}">
+            <input type="hidden" name="end_location" value="{{ end_location }}">
+            <input type="hidden" name="journey_cost" value="{{ suggested_route.LowestCost }}">
+            <label>Payment Method:
+                <select name="payment_method">
+                    <option value="Card">Card</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Online">Online</option>
+                </select>
+            </label><br>
+            <label>Apply Discount: <input type="checkbox" name="discount_applied"></label><br>
+            <input type="submit" value="Book Journey">
+        </form>
+    {% else %}
+        <p>No routes found within your budget.</p>
+    {% endif %}
+</body>
+</html>

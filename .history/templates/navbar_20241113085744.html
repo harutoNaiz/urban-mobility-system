@@ -1,0 +1,47 @@
+<!-- templates/navbar.html -->
+<nav class="navbar">
+    <ul>
+        <li><a href="{{ url_for('select_route') }}">Select Route</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</nav>
+<style>
+    /* Styling for the navbar */
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(33, 150, 243, 0.8); /* Transparent blue to match the page style */
+        padding: 10px 0;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: center;
+        z-index: 1000;
+    }
+    
+    .navbar ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+    }
+    
+    .navbar ul li {
+        margin: 0;
+    }
+    
+    .navbar ul li a {
+        color: white;
+        text-decoration: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+    
+    .navbar ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.3); /* Hover effect */
+    }
+</style>

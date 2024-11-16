@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #343a40;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #495057;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            color: #495057;
+        }
+        .card-body {
+            margin-top: 10px;
+        }
+        .btn-remove {
+            color: #dc3545;
+            font-size: 18px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .btn-remove:hover {
+            color: #c82333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .provider-info {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Admin Dashboard</h1>
+
+    <div class="container">
+        <!-- Service Providers Section -->
+        <div class="card">
+            <div class="card-header">
+                <span>Service Providers</span>
+                <button class="btn btn-primary" onclick="window.location.href='/admin/add_provider'">Add Provider</button>
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Provider Name</th>
+                            <th>Contact Info</th>
+                            <th>Type</th>
+                            <th>Fleet Size</th>
+                            <th>Service Area</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for provider in providers %}
+                            <tr>
+                                <td>{{ provider.Name }}</td>
+                                <td>{{ provider.ContactInfo }}</td>
+                                <td>{{ provider.Type }}</td>
+                                <td>{{ provider.FleetSize }}</td>
+                                <td>{{ provider.ServiceArea }}</td>
+                                <td>
+                                    <!-- Remove Button (Emoji as dustbin) -->
+                                    <form action="{{ url_for('remove_provider', provider_id=provider.ProviderID) }}" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn-remove" title="Remove Provider">🗑️</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Transport Modes Section -->
+        <div class="card">
+            <div class="card-header">
+                <span>Transport Modes</span>
+                <button class="btn btn-primary" onclick="window.location.href='/admin/add_transport'">Add Transport</button>
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Mode Type</th>
+                            <th>Provider</th>
+                            <th>Capacity</th>
+                            <th>Schedule</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for transport_mode in transport_modes %}
+                            <tr>
+                                <td>{{ transport_mode.ModeType }}</td>
+                                <td>{{ transport_mode.ProviderID }}</td>
+                                <td>{{ transport_mode.Capacity }}</td>
+                                <td>{{ transport_mode.Schedule }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Payments Section -->
+        <div class="card">
+            <div class="card-header">
+                <span>Payments</span>
+            </div>
+            <div class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Payment ID</th>
+                            <th>User Name</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                            <th>Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for payment in payments %}
+                            <tr>
+                                <td>{{ payment.PaymentID }}</td>
+                                <td>{{ payment.UserName }}</td>
+                                <td>{{ payment.Amount }}</td>
+                                <td>{{ payment.PaymentMethod }}</td>
+                                <td>{{ payment.PaymentDate }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

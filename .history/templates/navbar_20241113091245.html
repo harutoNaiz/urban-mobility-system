@@ -1,0 +1,44 @@
+<!-- templates/navbar.html -->
+<nav class="navbar">
+    <a href="javascript:history.back()" class="back-button"> <!-- Back button using JavaScript -->
+        ⬅️ <!-- Back icon emoji, can be replaced with Font Awesome or similar if desired -->
+    </a>
+    <a href="{{ url_for('logout') }}" class="logout-button">
+        🔒 <!-- Logout icon emoji, replaceable with Font Awesome icon if desired -->
+    </a>
+</nav>
+
+<style>
+    /* Styling for the navbar */
+    .navbar {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        background: transparent; /* Transparent background */
+        padding: 10px;
+        z-index: 1000;
+    }
+    
+    /* Back button styling */
+    .back-button, .logout-button {
+        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: #fff;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+    
+    /* Hover effect for buttons */
+    .back-button:hover, .logout-button:hover {
+        background-color: rgba(255, 255, 255, 0.4); /* Slightly darker on hover */
+    }
+</style>

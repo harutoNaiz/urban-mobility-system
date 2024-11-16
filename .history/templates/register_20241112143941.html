@@ -1,0 +1,9 @@
+<!-- templates/register.html -->
+<form action="{{ url_for('register_user') }}" method="post">
+    <label>Name: <input type="text" name="name"></label><br>
+    <label>Phone: <input type="text" name="phone"></label><br>
+    <label>Email: <input type="email" name="email"></label><br>
+    <label>Preferred Transport Mode: <input type="text" name="preferred_transport"></label><br>
+    <label>Commuting Pattern: <textarea name="commuting_pattern"></textarea></label><br>
+    <button type="submit">Register</button>
+</form>

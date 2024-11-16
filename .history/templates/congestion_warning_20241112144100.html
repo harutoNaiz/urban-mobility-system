@@ -1,0 +1,8 @@
+<!-- templates/congestion_warning.html -->
+<p>{{ traffic_warning }}</p>
+<form action="{{ url_for('suggest_routes') }}" method="post">
+    <input type="hidden" name="route_id" value="{{ route_id }}">
+    <input type="hidden" name="user_id" value="{{ user_id }}">
+    <label>Enter Budget: <input type="text" name="budget"></label><br>
+    <button type="submit">Get Suggestions</button>
+</form>

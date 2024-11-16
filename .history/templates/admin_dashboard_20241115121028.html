@@ -1,0 +1,181 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Base styles from sign_in.html */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            margin: 0;
+            padding: 20px;
+            color: #fff;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        /* Additional styles for dashboard */
+        .section {
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        th {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        form {
+            display: grid;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        input, select {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+        }
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('admin_logout') }}" class="logout-btn">
+        <button>Logout</button>
+    </a>
+
+    <div class="container">
+        <h2>Add Service Provider</h2>
+        <form action="{{ url_for('add_provider') }}" method="POST">
+            <input type="text" name="name" placeholder="Provider Name" required>
+            <input type="email" name="email" placeholder="Contact Email" required>
+            <input type="tel" name="phone" placeholder="Contact Phone" required>
+            <select name="type" required>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+            <input type="number" name="fleet_size" placeholder="Fleet Size" required>
+            <input type="text" name="service_area" placeholder="Service Area" required>
+            <button type="submit">Add Provider</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Add Transport Mode</h2>
+        <form action="{{ url_for('add_transport') }}" method="POST">
+            <input type="text" name="mode_type" placeholder="Mode Type" required>
+            <select name="provider_id" required>
+                {% for provider in providers %}
+                <option value="{{ provider.ProviderID }}">{{ provider.Name }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" name="capacity" placeholder="Capacity" required>
+            <input type="text" name="weekday_schedule" placeholder="Weekday Schedule" required>
+            <input type="text" name="weekend_schedule" placeholder="Weekend Schedule" required>
+            <button type="submit">Add Transport Mode</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>Service Providers</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Fleet Size</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for provider in providers %}
+                <tr>
+                    <td>{{ provider.ProviderID }}</td>
+                    <td>{{ provider.Name }}</td>
+                    <td>{{ provider.Type }}</td>
+                    <td>{{ provider.FleetSize }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Transport Modes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Provider ID</th>
+                    <th>Capacity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for mode in transport_modes %}
+                <tr>
+                    <td>{{ mode.TransportModeID }}</td>
+                    <td>{{ mode.ModeType }}</td>
+                    <td>{{ mode.ProviderID }}</td>
+                    <td>{{ mode.Capacity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Payment History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Payment ID</th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.PaymentID }}</td>
+                    <td>{{ payment.UserName }}</td>
+                    <td>${{ "%.2f"|format(payment.Amount) }}</td>
+                    <td>{{ payment.PaymentDate.strftime('%Y-%m-%d %H:%M') }}</td>
+                    <td>{{ payment.PaymentMethod }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

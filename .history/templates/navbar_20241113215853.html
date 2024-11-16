@@ -1,0 +1,128 @@
+<nav class="navbar">
+    <a href="javascript:history.back()" class="back-button">⬅️</a>
+    <div class="navbar-right">
+        <div class="payment-dropdown">
+            <button class="payment-button">💸</button>
+            <div class="payment-list">
+                {% if payments %}
+                    {% for payment in payments %}
+                        <div class="payment-item">
+                            <span>{{ payment.PaymentDate.strftime('%Y-%m-%d') }}: </span>
+                            <span>{{ payment.Amount }} {{ payment.PaymentMethod }}</span>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="payment-item">No payments yet.</div>
+                {% endif %}
+            </div>
+        </div>
+        <a href="{{ url_for('logout') }}" class="logout-button">🔒</a>
+    </div>
+</nav>
+
+<style>
+    .navbar {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: transparent;
+        padding: 10px;
+        z-index: 1000;
+    }
+
+    /* Back button styling */
+    .back-button {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: #fff;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+    .back-button:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Navbar right section */
+    .navbar-right {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    /* Payment dropdown styling */
+    .payment-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .payment-button {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .payment-button:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .payment-list {
+        display: none;
+        position: absolute;
+        top: 40px;
+        right: 0;
+        background-color: #fff;
+        color: #000;
+        min-width: 200px;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+
+    .payment-dropdown:hover .payment-list {
+        display: block;
+    }
+
+    .payment-item {
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .payment-item:last-child {
+        border-bottom: none;
+    }
+
+    /* Logout button styling */
+    .logout-button {
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: #fff;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+    .logout-button:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+</style>
